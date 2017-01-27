@@ -10,7 +10,7 @@ import plateforme.ObjetEnvironnement;
 public class Test {
 
 	public static void main(String[] args) {
-
+		
 		Hashtable<String,ObjetEnvironnement> fourchettes = 
 				new Hashtable<String,ObjetEnvironnement>();
 		for (int i = 0; i < 5; i++) {

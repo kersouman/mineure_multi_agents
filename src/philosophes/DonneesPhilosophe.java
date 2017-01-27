@@ -12,6 +12,8 @@ public class DonneesPhilosophe extends Donnees {
 	public final static int VAR_PENSER = 10;
 	public final static int VAR_MANGER = -10;
 	public final static int SEUIL_FAIM = 100;
+	public final static int SEUIL_RASSASIE = 0;
+	public final static int SEUIL_LACHER = 50;
 	
 	public enum Etat {
 		ATTENTE_FOURCHETTE,
@@ -35,6 +37,8 @@ public class DonneesPhilosophe extends Donnees {
 		this.donnees.put("f_droite_dispo", new Boolean(true));
 		
 		this.donnees.put("etat", Etat.EN_TRAIN_DE_PENSER);
+		
+		this.donnees.put("besoin_lacher", new Boolean(false));
 	}
 	
 }

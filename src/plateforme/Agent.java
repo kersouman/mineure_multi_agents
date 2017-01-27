@@ -6,7 +6,8 @@ public abstract class Agent extends Thread {
 	
 	protected Donnees donnees;
 	protected Environnement environnement;
-	protected ArrayList<Message> boiteAuxLettres;
+	protected ArrayList<Message> boiteAuxLettres = 
+			new ArrayList<Message>();
 	
 	public abstract void percevoir();
 	
