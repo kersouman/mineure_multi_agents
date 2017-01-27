@@ -33,8 +33,12 @@ public class Table extends Environnement {
 		case 1:
 			if((boolean)this.percevoir(f_courant)
 					&& (boolean)this.percevoir(f_suivant)) {
-				this.objets.get(f_courant).setObjet(new Boolean(false));
-				this.objets.get(f_suivant).setObjet(new Boolean(false));
+				synchronized(this.objets.get(f_courant)) {
+					this.objets.get(f_courant).setObjet(new Boolean(false));
+				}
+				synchronized(this.objets.get(f_suivant)) {
+					this.objets.get(f_suivant).setObjet(new Boolean(false));
+				}
 				estEffectue = true;
 			}
 			break;
@@ -42,10 +46,16 @@ public class Table extends Environnement {
 		case 2:
 			if(!((boolean)this.percevoir(f_courant)) &&
 					!((boolean)this.percevoir(f_suivant))) {
-				this.objets.get(f_courant).setObjet(new Boolean(true));
-				this.objets.get(f_suivant).setObjet(new Boolean(true));
+				synchronized(this.objets.get(f_courant)) {
+					this.objets.get(f_courant).setObjet(new Boolean(true));
+				}
+				synchronized(this.objets.get(f_suivant)) {
+					this.objets.get(f_suivant).setObjet(new Boolean(true));
+				}
 				estEffectue = true;
 			}
+			break;
+		default:
 			break;
 		}
 		

@@ -79,19 +79,21 @@ public class Philosophe extends Agent {
 			this.donnees.set("faim",
 					(int)this.donnees.get("faim")
 						+ DonneesPhilosophe.VAR_PENSER);
-			System.out.println("Philosophe " 
+			/*System.out.println("Philosophe " 
 					+ this.donnees.get("numero") + " : "
 					+ "Je pense et mon compteur de pensées est à "
 					+ this.donnees.get("cpt_pensee")
 					+ " et ma faim est à "
 					+ this.donnees.get("faim"));
+			*/
 			break;
 
 		// Action finir_penser
 		case 2:
 			this.donnees.set("etat", Etat.ATTENTE_FOURCHETTE);
-			System.out.println("Philosophe " + this.donnees.get("numero")
+			/*System.out.println("Philosophe " + this.donnees.get("numero")
 					+ " : Je me mets à attendre les fourchettes");
+			*/
 			break;
 			
 		// Action prendre_f
@@ -101,8 +103,9 @@ public class Philosophe extends Agent {
 			if(this.environnement.agir(donneesAction)) {
 				this.donnees.set("f_gauche", new Boolean(true));
 				this.donnees.set("f_droite", new Boolean(true));
-				System.out.println("Philosophe " + this.donnees.get("numero")
+				/*System.out.println("Philosophe " + this.donnees.get("numero")
 					+ " : J'ai pris les fourchettes");
+				*/
 			} else {
 				System.out.println("Philosophe " + this.donnees.get("numero")
 					+ " : Je n'ai pas réussi à prendre les fourchettes");
@@ -112,17 +115,19 @@ public class Philosophe extends Agent {
 		// Action commencer_manger
 		case 4:
 			this.donnees.set("etat", Etat.EN_TRAIN_DE_MANGER);
-			System.out.println("Philosophe " + this.donnees.get("numero")
+			/*System.out.println("Philosophe " + this.donnees.get("numero")
 					+ " : Je commence à manger");
+			*/
 			break;	
 			
 		// Action famine
 		case 5:
 			this.donnees.set("cpt_famine", 
 					(int)this.donnees.get("cpt_famine")+1);
-			System.out.println("Philosophe " + this.donnees.get("numero")
+			/*System.out.println("Philosophe " + this.donnees.get("numero")
 					+ " : J'attend mes fourchettes et mon compteur de "
 					+ "famine est à " + this.donnees.get("cpt_famine"));
+			*/
 			break;
 			
 		// Action manger
@@ -130,9 +135,10 @@ public class Philosophe extends Agent {
 			this.donnees.set("faim", 
 					(int)this.donnees.get("faim") 
 						+ DonneesPhilosophe.VAR_MANGER);
-			System.out.println("Philosophe " + this.donnees.get("numero")
+			/*System.out.println("Philosophe " + this.donnees.get("numero")
 					+ " : Je mange et ma faim est à "
 					+ this.donnees.get("faim"));
+			*/
 			break;
 
 		// Action finir_manger
@@ -143,9 +149,10 @@ public class Philosophe extends Agent {
 				this.donnees.set("f_gauche", new Boolean(false));
 				this.donnees.set("f_droite", new Boolean(false));
 				this.donnees.set("etat", Etat.EN_TRAIN_DE_PENSER);
-				System.out.println("Philosophe " 
+				/*System.out.println("Philosophe " 
 						+ this.donnees.get("numero") + " : "
 						+ "Je finis de manger et je pose mes fourchettes");
+				*/
 			} else {
 				System.out.println("Philosophe " 
 						+ this.donnees.get("numero") + " : "
