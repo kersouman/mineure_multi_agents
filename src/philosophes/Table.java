@@ -16,11 +16,8 @@ public class Table extends Environnement {
 	@Override
 	public void post(Message message) {
 		int[] destinataires = {-1,-1};
-		try{
-			destinataires[0] = (message.getEmetteur()-1);
-		} catch(ArrayIndexOutOfBoundsException e) {
-			destinataires[0] = DonneesPhilosophe.CPT_PHILOSOPHES-1;
-		}
+		destinataires[0] = 
+				(message.getEmetteur()+DonneesPhilosophe.CPT_PHILOSOPHES-1)%DonneesPhilosophe.CPT_PHILOSOPHES;
 		destinataires[1] = 
 				(message.getEmetteur()+1)%DonneesPhilosophe.CPT_PHILOSOPHES;
 		this.agents.get(destinataires[0]).post(message);

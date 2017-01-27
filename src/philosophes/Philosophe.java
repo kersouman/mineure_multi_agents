@@ -1,5 +1,8 @@
 package philosophes;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import philosophes.DonneesPhilosophe.Etat;
 import plateforme.Agent;
 import plateforme.Message;
@@ -22,11 +25,20 @@ public class Philosophe extends Agent {
 		this.donnees.set("f_droite_dispo", 
 				(boolean)this.environnement.percevoir(f_suivante));
 		
-		for(Message message: this.boiteAuxLettres) {
-			switch(message.getCodeMessage()) {
+		ArrayList<Message> tmp = this.boiteAuxLettres;
+		this.boiteAuxLettres = new ArrayList<Message>();
+		
+		synchronized(tmp) {
+			for(Message message: tmp) {
+				if (message==null)
+					continue; // comment peut-il y avoir des messages null ?
+				switch(message.getCodeMessage()) {
 				case 1:
 					this.donnees.set("besoin_lacher", new Boolean(true));
-					this.boiteAuxLettres.remove(message);
+					break;
+				default:
+					break;
+				}
 			}
 		}
 	}
@@ -190,7 +202,12 @@ public class Philosophe extends Agent {
 		System.out.println("Je suis le philosophe numéro " 
 					+ this.donnees.get("numero"));
 		while(true){
+			try {
 			this.boucle_procedurale();
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.exit(1);
+			}
 			/*try{
 				Thread.sleep(1000);
 			} catch (Exception e) {
