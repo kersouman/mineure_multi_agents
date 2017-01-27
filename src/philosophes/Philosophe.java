@@ -2,6 +2,7 @@ package philosophes;
 
 import philosophes.DonneesPhilosophe.Etat;
 import plateforme.Agent;
+import plateforme.Message;
 
 public class Philosophe extends Agent {
 
@@ -115,15 +116,17 @@ public class Philosophe extends Agent {
 		// Action commencer_manger
 		case 4:
 			this.donnees.set("etat", Etat.EN_TRAIN_DE_MANGER);
-			/*System.out.println("Philosophe " + this.donnees.get("numero")
+			System.out.println("Philosophe " + this.donnees.get("numero")
 					+ " : Je commence à manger");
-			*/
 			break;	
 			
 		// Action famine
 		case 5:
 			this.donnees.set("cpt_famine", 
 					(int)this.donnees.get("cpt_famine")+1);
+			Message message = 
+					new MessagePhilosophe((int)this.donnees.get("numero"),1);
+			this.send(message);
 			/*System.out.println("Philosophe " + this.donnees.get("numero")
 					+ " : J'attend mes fourchettes et mon compteur de "
 					+ "famine est à " + this.donnees.get("cpt_famine"));

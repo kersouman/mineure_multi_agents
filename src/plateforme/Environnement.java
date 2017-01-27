@@ -21,5 +21,7 @@ public abstract class Environnement {
 		return this.objets.get(clef).getObjet();
 	}
 	
+	public abstract void post(Message message);
+	
 	public abstract boolean agir(int[] codeAction);
 }

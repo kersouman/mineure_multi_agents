@@ -26,6 +26,7 @@ public class Fourchette implements ObjetEnvironnement {
 	
 	@Override
 	public void setObjet(Object objet) {
+		// TODO Auto-generated method stub
 		this.estDispo = (boolean)objet;
 	}
 

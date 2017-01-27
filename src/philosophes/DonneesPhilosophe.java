@@ -1,7 +1,9 @@
 package philosophes;
 
+import java.util.ArrayList;
+
 import plateforme.Donnees;
-import java.util.Hashtable;
+import plateforme.Message;
 
 public class DonneesPhilosophe extends Donnees {
 

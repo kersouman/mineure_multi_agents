@@ -1,10 +1,9 @@
 package philosophes;
 
-import java.util.ArrayList;
 import java.util.Hashtable;
 
-import plateforme.Agent;
 import plateforme.Environnement;
+import plateforme.Message;
 import plateforme.ObjetEnvironnement;
 
 public class Table extends Environnement {
@@ -15,7 +14,16 @@ public class Table extends Environnement {
 	}
 
 	@Override
-	public boolean agir(int[] donneesAction) {
+	public void post(Message message) {
+		int[] destinataires = 
+			{(message.getEmetteur()-1)%DonneesPhilosophe.CPT_PHILOSOPHES,
+					(message.getEmetteur()+1)%DonneesPhilosophe.CPT_PHILOSOPHES};
+		this.agents.get(destinataires[0]).post(message);
+		this.agents.get(destinataires[1]).post(message);
+	}
+	
+	@Override
+	public synchronized boolean agir(int[] donneesAction) {
 		/*
 		 *  Décomposition du tableau donneesAction
 		 *  0 : code de l'action
@@ -33,12 +41,8 @@ public class Table extends Environnement {
 		case 1:
 			if((boolean)this.percevoir(f_courant)
 					&& (boolean)this.percevoir(f_suivant)) {
-				synchronized(this.objets.get(f_courant)) {
-					this.objets.get(f_courant).setObjet(new Boolean(false));
-				}
-				synchronized(this.objets.get(f_suivant)) {
-					this.objets.get(f_suivant).setObjet(new Boolean(false));
-				}
+				this.objets.get(f_courant).setObjet(new Boolean(false));
+				this.objets.get(f_suivant).setObjet(new Boolean(false));
 				estEffectue = true;
 			}
 			break;
@@ -46,12 +50,8 @@ public class Table extends Environnement {
 		case 2:
 			if(!((boolean)this.percevoir(f_courant)) &&
 					!((boolean)this.percevoir(f_suivant))) {
-				synchronized(this.objets.get(f_courant)) {
-					this.objets.get(f_courant).setObjet(new Boolean(true));
-				}
-				synchronized(this.objets.get(f_suivant)) {
-					this.objets.get(f_suivant).setObjet(new Boolean(true));
-				}
+				this.objets.get(f_courant).setObjet(new Boolean(true));
+				this.objets.get(f_suivant).setObjet(new Boolean(true));
 				estEffectue = true;
 			}
 			break;
