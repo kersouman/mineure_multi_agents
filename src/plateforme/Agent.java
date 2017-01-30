@@ -19,7 +19,7 @@ public abstract class Agent extends Thread {
 		this.environnement.post(message);
 	}
 	
-	public void post(Message message) {
+	public synchronized void post(Message message) {
 		this.boiteAuxLettres.add(message);
 	}
 	
