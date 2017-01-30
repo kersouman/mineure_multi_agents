@@ -25,11 +25,8 @@ public class Philosophe extends Agent {
 		this.donnees.set("f_droite_dispo", 
 				(boolean)this.environnement.percevoir(f_suivante));
 		
-		ArrayList<Message> tmp = this.boiteAuxLettres;
-		this.boiteAuxLettres = new ArrayList<Message>();
-		
 		synchronized(this) {
-			for(Message message: tmp) {
+			for(Message message: this.boiteAuxLettres) {
 				switch(message.getCodeMessage()) {
 				case 1:
 					this.donnees.set("besoin_lacher", new Boolean(true));
@@ -38,6 +35,7 @@ public class Philosophe extends Agent {
 					break;
 				}
 			}
+			this.boiteAuxLettres = new ArrayList<Message>();
 		}
 	}
 
