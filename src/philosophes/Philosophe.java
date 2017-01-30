@@ -1,7 +1,6 @@
 package philosophes;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import philosophes.DonneesPhilosophe.Etat;
 import plateforme.Agent;
@@ -190,22 +189,9 @@ public class Philosophe extends Agent {
 		}
 	}
 
-	public void run() {
+	public void sePresenter() {
 		System.out.println("Je suis le philosophe numéro " 
 					+ this.donnees.get("numero"));
-		while(true){
-			try {
-			this.boucle_procedurale();
-			} catch (Exception e) {
-				e.printStackTrace();
-				System.exit(1);
-			}
-			/*try{
-				Thread.sleep(1000);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}*/
-		}
 	}
 	
 }

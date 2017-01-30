@@ -23,10 +23,15 @@ public abstract class Agent extends Thread {
 		this.boiteAuxLettres.add(message);
 	}
 	
-	public void boucle_procedurale() {
-		this.percevoir();
-		int codeAction = this.deliberer();
-		this.agir(codeAction);
+	public abstract void sePresenter();
+	
+	public void run() {
+		this.sePresenter();
+		while(true) {
+			this.percevoir();
+			int codeAction = this.deliberer();
+			this.agir(codeAction);
+		}
 	}
 	
 }
