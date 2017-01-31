@@ -2,8 +2,8 @@ package plateforme;
 
 public abstract class Message {
 
-	int emetteur = -1;
-	int codeMessage = -1;
+	private int emetteur = -1;
+	private int codeMessage = -1;
 	
 	public Message(int emetteur, int codeMessage) {
 		this.emetteur = emetteur;
