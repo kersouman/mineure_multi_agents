@@ -12,12 +12,15 @@ moyenne(:,1) = 0:19999;
 taux_faim = 0;
 
 for i=1:numel(fields)
-    moyenne(:,2:4) = 0.2*(data.(fields{i}).p0(:,2:4)...
-                        + data.(fields{i}).p1(:,2:4)...
-                        + data.(fields{i}).p2(:,2:4)...
-                        + data.(fields{i}).p3(:,2:4)...
-                        + data.(fields{i}).p4(:,2:4));
+    ffields = fieldnames(data.(fields{i}));
+    
+    for k=1:numel(ffields)
+    moyenne(:,2:4) = moyenne(:,2:4) + ...
+                      data.(fields{i}).(ffields{k})(:,2:4);
+    end
+    moyenne(:,2:4) = moyenne(:,2:4)/5;
     data.(fields{i}).moyenne = moyenne(:,[1,3,4]);
+    
     for k=1:length(moyenne)
         taux_faim = taux_faim + moyenne(k,2);
     end
@@ -25,7 +28,7 @@ for i=1:numel(fields)
     data.(fields{i}).taux_faim = taux_faim;
 end
 
-clear fields i k moyenne taux_faim
+clear fields ffields i k moyenne taux_faim
 
 %% Comparaison avec et sans messages
 figure('Name', 'Sans et avec messages')
