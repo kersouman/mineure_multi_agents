@@ -7,7 +7,7 @@ public class DonneesPhilosophe extends Donnees {
 	public static int CPT_PHILOSOPHES = 0;
 	
 	public final static int VAR_PENSER = 10;
-	public final static int VAR_MANGER = -10;
+	public final static int VAR_MANGER = -5;
 	public final static int SEUIL_FAIM = 100;
 	public final static int SEUIL_RASSASIE = 0;
 	public final static int SEUIL_LACHER = 50;

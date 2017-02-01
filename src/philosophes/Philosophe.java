@@ -1,5 +1,12 @@
 package philosophes;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import philosophes.DonneesPhilosophe.Etat;
@@ -11,6 +18,7 @@ public class Philosophe extends Agent {
 	public Philosophe(Table table, DonneesPhilosophe donnees) {
 		this.environnement = table;
 		this.donnees = donnees;
+		this.etatCsv.add("tour,faim,pensee,famine\n");
 	}
 	
 	@Override
@@ -77,7 +85,7 @@ public class Philosophe extends Agent {
 		
 		// Précondition à l'action manger
 		if(this.donnees.get("etat") == Etat.EN_TRAIN_DE_MANGER &&
-				(int)this.donnees.get("faim") >= 0)
+				(int)this.donnees.get("faim") >= DonneesPhilosophe.SEUIL_RASSASIE)
 			return 7;
 		
 		return 0;
@@ -85,7 +93,6 @@ public class Philosophe extends Agent {
 
 	@Override
 	public void agir(int codeAction) {
-		// TODO Auto-generated method stub
 		int[] donneesAction = {0,0};
 		
 		switch (codeAction) {
@@ -199,6 +206,34 @@ public class Philosophe extends Agent {
 	public void sePresenter() {
 		System.out.println("Je suis le philosophe numéro " 
 					+ this.donnees.get("numero"));
+	}
+
+	@Override
+	public void getEtatTour(int compteurTour) {
+		String etatTour = compteurTour + "," + this.donnees.get("faim")
+									   + "," + this.donnees.get("cpt_pensee")
+									   + "," + this.donnees.get("cpt_famine")
+									   + "\n";
+		this.etatCsv.add(etatTour);
+	}
+
+	@Override
+	public void ecrireEtatCsv() throws FileNotFoundException, 
+										UnsupportedEncodingException,
+										IOException{
+		String nameFile = "./resources/moins_var_manger/philosophe_" 
+					+ this.donnees.get("numero")
+					+ ".csv";
+		File ftw = new File(nameFile);
+		BufferedWriter bw = new BufferedWriter(
+				new OutputStreamWriter(
+						new FileOutputStream(ftw), "UTF-8"));
+		String csv = "";
+		for(String etat: this.etatCsv) {
+			csv += etat;
+		}
+		bw.write(csv);
+		bw.close();
 	}
 	
 }
